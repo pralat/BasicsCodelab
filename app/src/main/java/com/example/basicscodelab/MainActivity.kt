@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -52,8 +53,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
-                modifier = Modifier.weight(1f)
-                .padding(bottom = extraPadding)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello ")
                 Text(text = name)
@@ -83,7 +85,11 @@ fun MyApp2(
     modifier: Modifier = Modifier,
     names: List<String> = listOf("World", "Compose")
 ) {
-    Column(modifier=modifier.padding(vertical = 4.dp)) {
+    Column(
+        modifier = modifier
+            .padding(vertical = 4.dp)
+            .safeDrawingPadding() // This pushes content below the status bar) {
+    ) {
         for (name in names) {
             Greeting(name = name)
         }

@@ -1,6 +1,7 @@
 package com.example.basicscodelab
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -26,9 +27,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 
 class MainActivity : ComponentActivity() {
@@ -62,6 +65,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             stiffness = Spring.StiffnessLow
         )
     )
+
+    // snapshotFlow converts a Compose State into a Flow that emits whenever the value changes.
+    // This will catch every intermediate value during the spring animation.
+    LaunchedEffect(name) {
+        snapshotFlow { extraPadding }.collect { value ->
+            Log.d("Greeting", "extraPadding for $name: $value")
+        }
+    }
 
     Surface(
         color = MaterialTheme.colorScheme.primary,

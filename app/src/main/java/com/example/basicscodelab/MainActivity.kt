@@ -63,8 +63,6 @@ fun MyApp(modifier: Modifier = Modifier) {
 }
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var expanded by rememberSaveable { mutableStateOf(false) }
-
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
@@ -106,12 +104,6 @@ fun CardContents(name: String) {
                     text = ("Composem ipsum color sit lazy, " +
                             "padding theme elit, sed do bouncy. ").repeat(4),
                 )
-                if (expanded) {
-                    Text(
-                        text = ("Composem ipsum color sit lazy, " +
-                                "padding theme elit, sed do bouncy. ").repeat(4),
-                    )
-                }
             }
         }
 
